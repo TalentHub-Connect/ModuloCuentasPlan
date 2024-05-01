@@ -1,6 +1,5 @@
 package com.planes.planes.service;
 
-
 import com.planes.planes.model.Plan;
 import com.planes.planes.repository.PlanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +25,12 @@ public class PlanService {
     public Plan updatePlan(Long id, Plan newPlan) {
         return planRepository.findById(id)
             .map(plan -> {
-                plan.setNamePlan(newPlan.getNamePlan());
+                plan.setName(newPlan.getName());
                 plan.setDescription(newPlan.getDescription());
+                plan.setMaxNumWorkers(newPlan.getMaxNumWorkers());
+                plan.setPrice(newPlan.getPrice());
                 plan.setDuration(newPlan.getDuration());
-                plan.setMaxNumWorker(newPlan.getMaxNumWorker());
-                plan.setBonuses(newPlan.getBonuses());
-                plan.setStatus(newPlan.getStatus());
+                plan.setCompanyId(newPlan.getCompanyId());
                 return planRepository.save(plan);
             })
             .orElseGet(() -> {

@@ -1,7 +1,7 @@
 package com.planes.planes.controller;
 
 import com.planes.planes.model.Plan;
-import com.planes.planes.repository.PlanRepository;
+import com.planes.planes.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,33 +9,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/planes")
+@RequestMapping("/plans")
 public class PlanController {
 
     @Autowired
-    private PlanRepository planRepository;
+    private PlanService planService;
 
     @GetMapping
-    public List<Plan> getAllPlans() {
-        return planRepository.findAll();
+    public ResponseEntity<List<Plan>> getAllPlans() {
+        return ResponseEntity.ok(planService.findAllPlans());
     }
 
-    @PostMapping("/add")
-    public Plan addPlan(@RequestBody Plan plan) {
-        return planRepository.save(plan);
+    @PostMapping
+    public ResponseEntity<Plan> addPlan(@RequestBody Plan plan) {
+        return ResponseEntity.status(201).body(planService.savePlan(plan));
     }
 
-    @PutMapping("/edit/{id}")
-    public Plan updatePlan(@PathVariable Long id, @RequestBody Plan planDetails) {
-        Plan plan = planRepository.findById(id).orElseThrow(() -> new RuntimeException("Plan not found"));
-        // Set properties from planDetails to plan
-        return planRepository.save(plan);
+    @PutMapping("/{id}")
+    public ResponseEntity<Plan> updatePlan(@PathVariable Long id, @RequestBody Plan planDetails) {
+        return ResponseEntity.ok(planService.updatePlan(id, planDetails));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deletePlan(@PathVariable Long id) {
-        planRepository.deleteById(id);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePlan(@PathVariable Long id) {
+        planService.deletePlan(id);
         return ResponseEntity.ok().build();
     }
 }
-
