@@ -18,6 +18,11 @@ public class PlanService {
         return planRepository.findAll();
     }
 
+    public Plan findPlanById(Long id) {
+        return planRepository.findById(id).orElse(null);
+    }
+    
+
     public Plan savePlan(Plan plan) {
         return planRepository.save(plan);
     }

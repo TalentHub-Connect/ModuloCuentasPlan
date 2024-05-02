@@ -20,6 +20,16 @@ public class PlanController {
         return ResponseEntity.ok(planService.findAllPlans());
     }
 
+    @GetMapping("/{id}")
+public ResponseEntity<Plan> getPlanById(@PathVariable Long id) {
+    Plan plan = planService.findPlanById(id);
+    if (plan != null) {
+        return ResponseEntity.ok(plan);
+    } else {
+        return ResponseEntity.notFound().build();
+    }
+}
+
     @PostMapping
     public ResponseEntity<Plan> addPlan(@RequestBody Plan plan) {
         return ResponseEntity.status(201).body(planService.savePlan(plan));
