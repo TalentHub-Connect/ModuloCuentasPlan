@@ -10,10 +10,10 @@ public class Plan {
     private Long id;
     private String name;
     private String description;
-    private Integer maxNumWorkers;
+    private Integer maxnumworkers;
     private Double price;
     private String duration;
-    private Integer company_id;  
+    private String status;
 
     // Getters and Setters
     public Long getId() {
@@ -23,6 +23,7 @@ public class Plan {
     public void setId(Long id) {
         this.id = id;
     }
+
 
     public String getName() {
         return name;
@@ -40,13 +41,7 @@ public class Plan {
         this.description = description;
     }
 
-    public Integer getMaxNumWorkers() {
-        return maxNumWorkers;
-    }
 
-    public void setMaxNumWorkers(Integer maxNumWorkers) {
-        this.maxNumWorkers = maxNumWorkers;
-    }
 
     public Double getPrice() {
         return price;
@@ -64,11 +59,21 @@ public class Plan {
         this.duration = duration;
     }
 
-    public Integer getCompanyId() {
-        return company_id;
+    public Integer getMaxnumworkers() {
+        return maxnumworkers;
     }
 
-    public void setCompanyId(Integer company_id) {
-        this.company_id = company_id;
+    public void setMaxnumworkers(Integer maxnumworkers) {
+        this.maxnumworkers = maxnumworkers;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+  
 }

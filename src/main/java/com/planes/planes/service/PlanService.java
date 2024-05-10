@@ -32,10 +32,10 @@ public class PlanService {
             .map(plan -> {
                 plan.setName(newPlan.getName());
                 plan.setDescription(newPlan.getDescription());
-                plan.setMaxNumWorkers(newPlan.getMaxNumWorkers());
+                plan.setMaxnumworkers(newPlan.getMaxnumworkers());
                 plan.setPrice(newPlan.getPrice());
                 plan.setDuration(newPlan.getDuration());
-                plan.setCompanyId(newPlan.getCompanyId());
+                plan.setStatus(newPlan.getStatus());
                 return planRepository.save(plan);
             })
             .orElseGet(() -> {
